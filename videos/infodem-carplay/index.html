@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      /* Satoshi : satoshi-variable.woff2 est introuvable dans le dossier -> repli sur Outfit
+         (variable). Pour passer à Satoshi : poser le fichier dans assets/ et remplacer
+         l'url ci-dessous par assets/satoshi-variable.woff2. */
+      @font-face {
+        font-family: "Satoshi";
+        src: url("assets/outfit-fallback.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+      }
+      :root {
+        --bg: #040405;
+        --ink: #f5f5f7;
+        --accent: #ff8a3d;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg);
+        font-family: "Satoshi", sans-serif;
+        color: var(--ink);
+      }
+      #roll,
+      .layer {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1080px;
+        height: 1920px;
+      }
+      .layer {
+        transform-origin: 0 0;
+      }
+      .w {
+        position: absolute;
+        white-space: nowrap;
+        line-height: 1;
+        letter-spacing: -0.045em;
+        font-weight: 800;
+      }
+      .acc {
+        color: var(--accent);
+      }
+      #t-infodem {
+        left: 64px;
+        top: 560px;
+        font-size: 244px;
+      }
+      #t-fait {
+        left: 72px;
+        top: 836px;
+        font-size: 104px;
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        color: rgba(245, 245, 247, 0.7);
+      }
+      #t-des {
+        left: 330px;
+        top: 836px;
+        font-size: 104px;
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        color: rgba(245, 245, 247, 0.7);
+      }
+      #t-carplay {
+        left: 64px;
+        top: 968px;
+        font-size: 244px;
+      }
+      .shape {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 140px;
+        height: 140px;
+        margin: -70px 0 0 -70px;
+        opacity: 0;
+      }
+      .shape svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      #grid {
+        position: absolute;
+        left: -960px;
+        top: -1040px;
+        width: 3000px;
+        height: 4000px;
+      }
+      #final-1 {
+        left: 78px;
+        top: 596px;
+        font-size: 176px;
+      }
+      #final-2 {
+        left: 84px;
+        top: 806px;
+        font-size: 84px;
+        font-weight: 500;
+        letter-spacing: -0.03em;
+      }
+      #rule {
+        position: absolute;
+        left: 86px;
+        top: 944px;
+        width: 132px;
+        height: 7px;
+        background: var(--accent);
+        transform-origin: 0 50%;
+      }
+      #final-3 {
+        left: 84px;
+        top: 988px;
+        font-size: 60px;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        color: rgba(245, 245, 247, 0.82);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="8"
+      data-fps="30"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div id="scene" class="clip" data-start="0" data-duration="8" data-track-index="0">
+        <div id="roll">
+          <!-- far : quadrillage + formes lointaines -->
+          <div id="L-far" class="layer">
+            <svg id="grid" viewBox="0 0 3000 4000" aria-hidden="true">
+              <g stroke="#f5f5f7" stroke-opacity="0.07" stroke-width="2">
+                <line x1="0" y1="1040" x2="3000" y2="1040" />
+                <line x1="0" y1="1520" x2="3000" y2="1520" />
+                <line x1="0" y1="2000" x2="3000" y2="2000" />
+                <line x1="0" y1="2480" x2="3000" y2="2480" />
+                <line x1="0" y1="2960" x2="3000" y2="2960" />
+                <line x1="960" y1="0" x2="960" y2="4000" />
+                <line x1="1320" y1="0" x2="1320" y2="4000" />
+                <line x1="1680" y1="0" x2="1680" y2="4000" />
+                <line x1="2040" y1="0" x2="2040" y2="4000" />
+              </g>
+            </svg>
+            <div id="s-ring" class="shape">
+              <svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="52" fill="none" stroke="#ff8a3d" stroke-width="14" /></svg>
+            </div>
+            <div id="s-bars" class="shape">
+              <svg viewBox="0 0 140 140">
+                <g fill="#f5f5f7">
+                  <rect x="22" y="20" width="22" height="100" rx="4" />
+                  <rect x="59" y="60" width="22" height="60" rx="4" />
+                  <rect x="96" y="40" width="22" height="80" rx="4" />
+                </g>
+              </svg>
+            </div>
+          </div>
+          <!-- mid : titre + formes moyennes -->
+          <div id="L-mid" class="layer">
+            <div id="title" data-layout-allow-overlap>
+              <div id="t-infodem" class="w">Infodem</div>
+              <div id="t-fait" class="w">fait</div>
+              <div id="t-des" class="w">des</div>
+              <div id="t-carplay" class="w acc">Carplay</div>
+            </div>
+            <div id="s-square" class="shape">
+              <svg viewBox="0 0 140 140"><rect x="26" y="26" width="88" height="88" rx="6" fill="none" stroke="#f5f5f7" stroke-width="10" /></svg>
+            </div>
+            <div id="s-tri" class="shape">
+              <svg viewBox="0 0 140 140"><polygon points="70,20 122,112 18,112" fill="none" stroke="#f5f5f7" stroke-width="10" stroke-linejoin="round" /></svg>
+            </div>
+            <div id="final" data-layout-allow-overlap>
+              <div id="final-1" class="w">Infodem</div>
+              <div id="final-2" class="w">fait des <span class="acc">Carplay</span></div>
+              <div id="rule"></div>
+              <div id="final-3" class="w">sans After Effects</div>
+            </div>
+          </div>
+          <!-- near : formes proches (parallaxe forte) -->
+          <div id="L-near" class="layer">
+            <div id="s-dot" class="shape">
+              <svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="34" fill="#ff8a3d" /></svg>
+            </div>
+            <div id="s-cross" class="shape">
+              <svg viewBox="0 0 140 140"><path d="M70 22 V118 M22 70 H118" stroke="#ff8a3d" stroke-width="16" stroke-linecap="round" fill="none" /></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      /* ---------- caméra : un proxy pilote toutes les couches (parallaxe par profondeur) ---------- */
+      const cam = { s: 1, tx: 0, ty: 0 };
+      const layers = [
+        { el: document.getElementById("L-far"), d: 0.55 },
+        { el: document.getElementById("L-mid"), d: 1 },
+        { el: document.getElementById("L-near"), d: 1.45 },
+      ];
+      function applyCam() {
+        for (const L of layers) {
+          const k = Math.pow(cam.s, L.d);
+          gsap.set(L.el, {
+            x: 540 - (540 + cam.tx * L.d) * k,
+            y: 960 - (960 + cam.ty * L.d) * k,
+            scale: k,
+          });
+        }
+      }
+      applyCam();
+      const camTween = (vars, at) =>
+        tl.to(cam, { ...vars, onUpdate: applyCam, immediateRender: false }, at);
+
+      // 0 → 2.9 : poussée lente sur le titre
+      camTween({ s: 1.1, tx: 18, ty: -14, duration: 2.9, ease: "sine.inOut" }, 0);
+      // 2.9 → 3.95 : on traverse le titre (zoom accéléré vers l'entrelignes)
+      camTween({ s: 14, tx: 20, ty: -70, duration: 1.05, ease: "power3.in" }, 2.9);
+      // 3.95 → 4.9 : sortie de l'autre côté, travelling arrière
+      camTween({ s: 0.92, tx: -50, ty: 40, duration: 0.95, ease: "expo.out" }, 3.95);
+      // 4.9 → 6.2 : travelling latéral pendant la danse
+      camTween({ s: 1.12, tx: 70, ty: -60, duration: 1.3, ease: "sine.inOut" }, 4.9);
+      // 6.2 → 7.1 : tout se range
+      camTween({ s: 1, tx: 0, ty: 0, duration: 0.9, ease: "expo.inOut" }, 6.2);
+      // 7.1 → 8 : respiration finale
+      camTween({ s: 1.018, tx: 0, ty: -6, duration: 0.9, ease: "sine.inOut" }, 7.1);
+
+      // roulis léger
+      tl.fromTo("#roll", { rotation: 0, transformOrigin: "50% 50%" }, { rotation: -2.2, duration: 2.9, ease: "sine.inOut" }, 0);
+      tl.to("#roll", { rotation: 3.5, duration: 1.8, ease: "power2.inOut" }, 3.4);
+      tl.to("#roll", { rotation: -2, duration: 1.4, ease: "sine.inOut" }, 5.2);
+      tl.to("#roll", { rotation: 0, duration: 0.9, ease: "expo.inOut" }, 6.2);
+
+      /* ---------- titre : les mots arrivent un par un ---------- */
+      tl.fromTo("#t-fait", { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" }, 0.9);
+      tl.fromTo("#t-des", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.6, ease: "power4.out" }, 1.4);
+      tl.fromTo("#t-carplay", { opacity: 0, scale: 1.35, transformOrigin: "0% 60%" }, { opacity: 1, scale: 1, duration: 0.9, ease: "back.out(1.4)" }, 1.9);
+      tl.to("#title", { opacity: 0, duration: 0.3, ease: "power1.in" }, 3.7);
+
+      /* ---------- formes : elles apparaissent à la sortie du titre, dansent, puis se rangent ---------- */
+      // position finale : rangée régulière, bas de l'image
+      const row = (i) => 165 + i * 150;
+      const FY = 1560;
+      const shapes = {
+        ring: { id: "#s-ring", end: [row(0), FY], way: [[220, 520, 90, 1.5], [840, 760, 200, 0.9], [300, 1240, 330, 1.2]] },
+        square: { id: "#s-square", end: [row(1), FY], way: [[860, 420, -40, 1.1], [200, 880, 70, 1.4], [800, 1300, 190, 0.8]] },
+        dot: { id: "#s-dot", end: [row(2), FY], way: [[560, 360, 0, 1.3], [380, 1040, 0, 0.7], [700, 840, 0, 1.6]] },
+        tri: { id: "#s-tri", end: [row(3), FY], way: [[160, 1180, 30, 1.0], [620, 560, -120, 1.5], [930, 1000, 150, 0.9]] },
+        cross: { id: "#s-cross", end: [row(4), FY], way: [[900, 1380, 20, 1.2], [260, 700, 110, 0.8], [540, 1280, 250, 1.4]] },
+        bars: { id: "#s-bars", end: [row(5), FY], way: [[420, 1440, -20, 1.0], [880, 560, 40, 1.3], [180, 1000, -90, 1.0]] },
+      };
+      const eases = ["power3.inOut", "back.out(1.7)", "sine.inOut"];
+      let n = 0;
+      for (const key of Object.keys(shapes)) {
+        const sh = shapes[key];
+        const t0 = 3.95 + n * 0.05;
+        // apparition, depuis le centre du cadre
+        tl.fromTo(sh.id, { x: 540, y: 960, scale: 0.2, rotation: -90, opacity: 0 },
+          { x: sh.way[0][0], y: sh.way[0][1], scale: sh.way[0][3], rotation: sh.way[0][2], opacity: 1, duration: 0.85, ease: "expo.out" }, t0);
+        // danse : deux déplacements, rythmes différents selon la forme
+        const a = 4.9 + n * 0.04;
+        tl.to(sh.id, { x: sh.way[1][0], y: sh.way[1][1], scale: sh.way[1][3], rotation: sh.way[1][2], duration: 0.65, ease: eases[n % 3] }, a);
+        const b = a + 0.62;
+        tl.to(sh.id, { x: sh.way[2][0], y: sh.way[2][1], scale: sh.way[2][3], rotation: sh.way[2][2], duration: 0.62, ease: eases[(n + 1) % 3] }, b);
+        // rangement
+        tl.to(sh.id, { x: sh.end[0], y: sh.end[1], scale: 1, rotation: 0, duration: 0.8, ease: "expo.inOut" }, 6.25 + n * 0.04);
+        n++;
+      }
+
+      /* ---------- dernière image : titre rangé + « sans After Effects » ---------- */
+      tl.fromTo("#final-1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 6.45);
+      tl.fromTo("#final-2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 6.65);
+      tl.fromTo("#rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power4.out" }, 6.85);
+      tl.fromTo("#final-3", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 7.0);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
